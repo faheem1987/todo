@@ -1,0 +1,85 @@
+
+header{
+  height: 50px;
+  text-align: center;
+  background-color: #3498db;
+  color: #fff;
+}
+h3 {
+  margin: 0 auto;
+  padding: 10px;
+}
+.todo-wrapper{
+  text-align: center;
+  padding: 20px;
+}
+
+.todo-wrapper input{
+  width: 500px;
+  height: 45px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.todo-wrapper .btn{
+  margin-left: 50px;
+  width: 100px;
+}
+
+.todo-wrapper .bg-info,
+.todo-wrapper .bg-danger{
+  padding: 10px;
+  margin: 10px;
+  font-size: 20px;
+}
+
+.todo-wrapper .icon-wrapper{
+  float: right;
+  width: 6px;
+  height: 52px;
+  margin-top: -11px;
+  width: 5%;
+}
+
+.todo-wrapper i{
+  float: right;
+  cursor: pointer;
+  width: 30px;
+  height: 25px;
+}
+
+.todo-wrapper .todolist{
+  max-height: 590px;
+  overflow: scroll;
+  list-style-type: none;
+}
+
+.todo-wrapper .todo-item {
+  width: 80%;
+  display: inline-block;
+}
+
+.todo-wrapper .completedItem {
+  background-color: rgba(91, 192, 222, 0.5) !important;
+  text-decoration: line-through;
+}
+
+.todo-wrapper .completedItem .todo-item {
+  text-decoration: line-through;
+}
+
+.todo-wrapper .date-wrapper {
+  float: left;
+  width: 15%;
+  height: 14px;
+  font-size: 10px;
+  border-radius: 5px;
+  position: absolute;
+  margin-top: -10px;
+}
+
+.todo-wrapper .date-wrapper {
+  background-color: grey;
+  width: 50px;
+  float: left;
+}
