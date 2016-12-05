@@ -22,3 +22,4 @@ Click [here](https://github.com/fahmad/reactTodo/releases) then download the .zi
 	> npm install
 	> npm start
 ```
+<img width="1440" alt="screen shot 2016-12-04 at 10 47 13 pm" src="https://cloud.githubusercontent.com/assets/8333965/20875985/b00c7e4a-ba73-11e6-9a28-f42ca40307ea.png">
