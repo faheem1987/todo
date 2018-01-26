@@ -1,27 +1,19 @@
-# React Redux todo example
-
-# [DEMO](http://letsdocode.org/todo/)
+# reactTodo [![NPM version](https://badge.fury.io/js/reactTodo.svg)](https://npmjs.org/package/reactTodo) [![Build Status](https://travis-ci.org/StephenGrider/reactTodo.svg?branch=master)](https://travis-ci.org/StephenGrider/reactTodo)
 
 
-###Getting Started###
+## Installation
 
-There are two methods for getting started with this repo.
-
-####Familiar with Git?#####
-Checkout this repo, install dependencies, then start the gulp process with the following:
-
-```
-	> git clone git@github.com:StephenGrider/reactTodo.git
-	> cd reactTodo
-	> npm install
-	> npm start
+```sh
+$ npm install --save reactTodo
 ```
 
-####Not Familiar with Git?#####
-Click [here](https://github.com/fahmad/reactTodo/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
+## Usage
 
+```js
+import ToDo from "todo";
+<ToDo />;
 ```
-	> npm install
-	> npm start
-```
-<img width="1440" alt="screen shot 2016-12-04 at 10 47 13 pm" src="https://cloud.githubusercontent.com/assets/8333965/20875985/b00c7e4a-ba73-11e6-9a28-f42ca40307ea.png">
+
+## License
+
+ISC © [Faheem Ahmad]()
