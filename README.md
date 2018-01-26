@@ -1,4 +1,6 @@
-# reactTodo [![NPM version](https://badge.fury.io/js/reactTodo.svg)](https://npmjs.org/package/reactTodo) [![Build Status](https://travis-ci.org/StephenGrider/reactTodo.svg?branch=master)](https://travis-ci.org/StephenGrider/reactTodo)
+# reactTodo
+
+### [Demo]: www.letsdocode.org/todo
 
 
 ## Installation
