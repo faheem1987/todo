@@ -1,6 +1,6 @@
 # reactTodo
 
-### [Demo]: www.letsdocode.org/todo
+#### [Demo](www.letsdocode.org/todo)
 
 
 ## Installation
