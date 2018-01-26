@@ -11,34 +11,16 @@ h3 {
 }
 .todo-wrapper{
   text-align: center;
-  padding: 20px;
-}
-
-.todo-wrapper input{
-  width: 500px;
-  height: 45px;
-  padding: 10px;
-  font-size: 18px;
 }
 
 .todo-wrapper .btn{
-  margin-left: 50px;
-  width: 100px;
+  margin-left: 10px;
 }
 
-.todo-wrapper .bg-info,
 .todo-wrapper .bg-danger{
   padding: 10px;
   margin: 10px;
   font-size: 20px;
-}
-
-.todo-wrapper .icon-wrapper{
-  float: right;
-  width: 6px;
-  height: 52px;
-  margin-top: -11px;
-  width: 5%;
 }
 
 .todo-wrapper i{
@@ -49,14 +31,7 @@ h3 {
 }
 
 .todo-wrapper .todolist{
-  max-height: 590px;
-  overflow: scroll;
   list-style-type: none;
-}
-
-.todo-wrapper .todo-item {
-  width: 80%;
-  display: inline-block;
 }
 
 .todo-wrapper .completedItem {
@@ -64,22 +39,27 @@ h3 {
   text-decoration: line-through;
 }
 
-.todo-wrapper .completedItem .todo-item {
-  text-decoration: line-through;
+.todo-form {
+	width: 100%;
+	padding: 0 50px;
+	text-align: center;
+	margin: 10px 0;
 }
 
-.todo-wrapper .date-wrapper {
-  float: left;
-  width: 15%;
-  height: 14px;
-  font-size: 10px;
-  border-radius: 5px;
-  position: absolute;
-  margin-top: -10px;
+.todo-input {
+	width: 70%;
+	padding: 5px;
 }
 
-.todo-wrapper .date-wrapper {
-  background-color: grey;
-  width: 50px;
-  float: left;
+.btn-success {
+	width: 20%;
+}
+
+.item {
+	padding: 5px 0;
+	color: #fff;
+	display: grid;
+	grid-template-columns: 90px auto 90px;
+	grid-template-rows: auto;
+	margin-bottom: 10px;
 }
