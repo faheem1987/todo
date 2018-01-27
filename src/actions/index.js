@@ -4,9 +4,9 @@ export const GET_TODO_ITEM = "GET_TODO_ITEM";
 
 export const DELETE_TODO_ITEM = "DELETE_TODO_ITEM";
 
-export const RETRIEVE_TODOS_REQUEST = "RETRIEVE_TODOS_REQUEST";
+export const FETCH_TODOS_REQUEST = "FETCH_TODOS_REQUEST";
 
-export const RETRIEVE_TODOS_SUCCESS = "RETRIEVE_TODOS_SUCCESS";
+export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
 
 export const COMPLETED_TODO_ITEM = "COMPLETED_TODO_ITEM";
 
@@ -27,45 +27,42 @@ function getTodos() {
 		.database()
 		.ref("posts")
 		.once("value")
-		.then(function(snapshot) {
-			var username = snapshot.val();
-			return username;
-		});
+		.then(snapshot => snapshot.val());
 }
 
 function postTodo(item, index) {
 	firebase
 		.database()
-		.ref("posts/" + (index + 1))
-		.set({ item });
+		.ref("posts/" + index)
+		.set({ item: item, date: Date() });
 	return getTodos().then(result => result);
 }
 
-function markTodoAsCompleted(keyName, isCompleted) {
+function markTodoAsCompleted(index, isCompleted) {
 	firebase
 		.database()
-		.ref("posts/" + keyName)
+		.ref("posts/" + index)
 		.update({ completed: isCompleted });
 	return getTodos().then(result => result);
 }
 
-function deletePost({ keyName }) {
-	var deletePost = firebase.database().ref("posts/" + keyName);
+function deletePost(index) {
+	var deletePost = firebase.database().ref("posts/" + index);
 	return deletePost.remove().then(function() {
 		return getTodos().then(result => result);
 	});
 }
 
-export function retrieveTodosActionRequest() {
+export function fetchTodos() {
 	return {
-		type: RETRIEVE_TODOS_REQUEST,
+		type: FETCH_TODOS_REQUEST,
 		payload: getTodos().then(result => retrieveTodosAction(result))
 	};
 }
 
 function retrieveTodosAction(result) {
 	return {
-		type: RETRIEVE_TODOS_SUCCESS,
+		type: FETCH_TODOS_SUCCESS,
 		payload: result
 	};
 }
@@ -77,16 +74,16 @@ export function todoItemAction({ inputVal, todosLength }) {
 	};
 }
 
-export function deleteTodoItemAction(itemToDelete) {
+export function deleteTodoItemAction(index) {
 	return {
 		type: DELETE_TODO_ITEM,
-		payload: deletePost(itemToDelete)
+		payload: deletePost(index)
 	};
 }
 
-export function completedTodoItemAction(keyName, isCompleted) {
+export function completedTodoItemAction(index, isCompleted) {
 	return {
 		type: COMPLETED_TODO_ITEM,
-		payload: markTodoAsCompleted(keyName, isCompleted)
+		payload: markTodoAsCompleted(index, isCompleted)
 	};
 }

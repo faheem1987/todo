@@ -4,28 +4,27 @@ import {
 	RETRIEVE_TODOS_REQUEST,
 	COMPLETED_TODO_ITEM
 } from "../actions/index";
-const item = [];
+const initialState = {
+	todos: []
+};
 
-// function deleteTodo(payload, state){
-//   return payload.todos.filter((_, index) => index !== payload.index);
-// }
-function todoItemReducer(state = {}, action) {
-	if (action.type === "RETRIEVE_TODOS_REQUEST") {
+function todoItemReducer(state = initialState, action) {
+	if (action.type === "FETCH_TODOS_REQUEST") {
 		return {
 			...state,
-			posts: action.payload.payload
+			todos: action.payload.payload || []
 		};
 	} else if (action.type === "GET_TODO_ITEM") {
 		return {
-			posts: action.payload
+			todos: action.payload
 		};
 	} else if (action.type === "DELETE_TODO_ITEM") {
 		return {
-			posts: action.payload
+			todos: action.payload
 		};
 	} else if (action.type === "COMPLETED_TODO_ITEM") {
 		return {
-			posts: action.payload
+			todos: action.payload
 		};
 	}
 	return state;

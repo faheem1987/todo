@@ -1,4 +1,3 @@
-
 header{
   height: 50px;
   text-align: center;
@@ -31,7 +30,8 @@ h3 {
 }
 
 .todo-wrapper .todolist{
-  list-style-type: none;
+	list-style-type: none;
+	padding: 0 20px;
 }
 
 .todo-wrapper .completedItem {
@@ -62,4 +62,13 @@ h3 {
 	grid-template-columns: 90px auto 90px;
 	grid-template-rows: auto;
 	margin-bottom: 10px;
+}
+
+.date,
+.action{
+	font-size: 14px;
+}
+
+.todo {
+	font-size: 24px;
 }

@@ -7,55 +7,48 @@ import { bindActionCreators } from "redux";
 import {
 	todoItemAction,
 	deleteTodoItemAction,
-	retrieveTodosActionRequest,
+	fetchTodos,
 	completedTodoItemAction
 } from "../actions/index";
 
 class Todo extends React.Component {
 	constructor(props) {
 		super(props);
-		this._deleteTodoItem = this._deleteTodoItem.bind(this);
 		this._getInputValue = this._getInputValue.bind(this);
 		this._renderTodos = this._renderTodos.bind(this);
 		this._renderDate = this._renderDate.bind(this);
+		this._setRefs = this._setRefs.bind(this);
 		this.state = { emptyForm: false, toggle: true };
 	}
 
 	componentDidMount() {
-		this.props.retrieveTodosActionRequest();
+		this.props.fetchTodos();
 	}
 
 	_getInputValue() {
 		const { todos } = this.props;
-		const todosLength =
-			todos.posts !== null && Object.keys(todos.posts).length > 0
-				? Object.keys(todos.posts).length
-				: 0;
-		const inputVal = this.refs.todo.value;
+		const todosLength = todos.length || 0;
+		const inputVal = this.inputRef.value;
 		if (inputVal) {
 			this.props.todoItemAction({ inputVal, todosLength });
-			this.refs.todo.value = "";
+			this.inputRef.value = "";
 			this.setState({ emptyForm: false });
 			return;
 		}
 		this.setState({ emptyForm: true });
 	}
 
-	_deleteTodoItem(index) {
-		this.props.deleteTodoItemAction(index);
-	}
-
-	_onCompleteTodoItem(keyName, isCompleted) {
+	_onCompleteTodoItem(index, isCompleted) {
 		const { completedTodoItemAction } = this.props;
 		if (isCompleted) {
-			completedTodoItemAction(keyName, false);
+			completedTodoItemAction(index, false);
 			return;
 		}
-		completedTodoItemAction(keyName, true);
+		completedTodoItemAction(index, true);
 	}
 
-	_renderDate() {
-		var d = new Date();
+	_renderDate({ date }) {
+		var d = new Date(date);
 		return (
 			<span>
 				{d.getMonth() + 1}/{d.getDate()}/{d.getFullYear()}
@@ -63,54 +56,51 @@ class Todo extends React.Component {
 		);
 	}
 
-	_renderTodos(todo) {
-		if (todo.posts !== null) {
-			return Object.keys(todo.posts).map(function(keyName, index) {
-				console.log(this);
-				const completedItem = classNames("item bg-info fadeIn animated", {
-					completedItem: todo.posts[keyName].completed
-				});
-				const checkBox = classNames({
-					"ion-ios-checkmark-outline": !todo.posts[keyName].completed,
-					"ion-ios-checkmark": todo.posts[keyName].completed
-				});
-				return (
-					<li className={completedItem} key={index}>
-						<div>{this._renderDate()}</div>
-						<div>{todo.posts[keyName].item}</div>
-						<div>
+	_renderTodos() {
+		const { todos, deleteTodoItemAction } = this.props;
+		return todos.map(function(todo, index) {
+			const completedItem = classNames("item bg-info fadeIn animated", {
+				completedItem: todo.completed
+			});
+			const checkBox = classNames(
+				!todo.completed ? "ion-ios-checkmark-outline" : "ion-ios-checkmark"
+			);
+			return (
+				<li className={completedItem} key={index}>
+					{<div className="date">{this._renderDate(todo)}</div>}
+					<div className="todo">{todo.item}</div>
+					<div className="actions">
+						{
 							<i
 								className={checkBox}
-								onClick={() =>
-									this._onCompleteTodoItem(
-										keyName,
-										todo.posts[keyName].completed
-									)
-								}
+								onClick={() => this._onCompleteTodoItem(index, todo.completed)}
 							/>
+						}
+						{
 							<i
 								className="ion-android-close"
-								onClick={() => this._deleteTodoItem({ keyName, todo })}
+								onClick={() => deleteTodoItemAction(index)}
 							/>
-						</div>
-					</li>
-				);
-			}, this);
-		}
+						}
+					</div>
+				</li>
+			);
+		}, this);
+	}
+
+	_setRefs(el) {
+		this.inputRef = el;
 	}
 
 	render() {
 		const { todos } = this.props;
-		const todoItem = Object.keys(todos).length
-			? this._renderTodos(todos)
-			: null;
 		return (
 			<div className="todo-wrapper">
 				{this.state.emptyForm && (
 					<div className="bg-danger">Please enter todo.</div>
 				)}
 				<form className="todo-form">
-					<input type="text" ref="todo" className="todo-input" />
+					<input type="text" ref={this._setRefs} className="todo-input" />
 					<button
 						type="button"
 						className="btn btn-success"
@@ -120,28 +110,28 @@ class Todo extends React.Component {
 						Submit{" "}
 					</button>
 				</form>
-				{todoItem && <TodoList list={todoItem} />}
+				{!!todos && !!todos.length && <TodoList list={this._renderTodos()} />}
 			</div>
 		);
 	}
 }
 
 Todo.propTypes = {
-	todos: PropTypes.object,
+	todos: PropTypes.array,
 	todoItemAction: PropTypes.func,
 	deleteTodoItemAction: PropTypes.func,
 	completedTodoItemAction: PropTypes.func,
-	retrieveTodosActionRequest: PropTypes.func
+	fetchTodos: PropTypes.func
 };
 
 export default connect(
 	state => ({
-		todos: state.todoItemReducer
+		todos: state.todoItemReducer.todos
 	}),
 	{
 		todoItemAction,
 		deleteTodoItemAction,
 		completedTodoItemAction,
-		retrieveTodosActionRequest
+		fetchTodos
 	}
 )(Todo);
